@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TopChillog Valentine Tarot</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #f7c84c; /* TopChillog yellow */
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 420px;
+      width: 100%;
+      padding: 24px;
+      text-align: center;
+    }
+
+    h2 {
+      margin: 6px 0;
+    }
+
+    p {
+      margin: 6px 0;
+    }
+
+    .tarot {
+      width: 100%;
+      border-radius: 16px;
+      margin: 16px 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .tarot.show {
+      opacity: 1;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    .hint {
+      font-size: 0.8rem;
+      margin-top: 10px;
+      opacity: 0.75;
+    }
+
+    .disclaimer {
+      font-size: 0.75rem;
+      margin-top: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h2>💖 Valentine Tarot 💖</h2>
+    <p>Chill ka lang. Eto ang message mo today 😌</p>
+
+    <!-- Tarot Card -->
+    <img id="tarotCard" class="tarot" alt="Tarot Card">
+
+    <!-- Buttons -->
+    <div class="buttons">
+      <button onclick="showRandomCard()">
+        🔮 Scan again
+      </button>
+
+      <button onclick="saveCard()">
+        💾 Save this card
+      </button>
+    </div>
+
+    <div class="hint">
+      Tip: Long-press the image to save ✨
+    </div>
+
+    <div class="disclaimer">
+      For entertainment purposes only
+    </div>
+
+  </div>
+
+  <script>
+    // Auto-generate tarot1.png to tarot21.png
+    const images = Array.from({ length: 21 }, (_, i) =>
+      `images/tarot${i + 1}.png`
+    );
+
+    let currentCard = "";
+
+    function showRandomCard() {
+      const card = document.getElementById("tarotCard");
+      card.classList.remove("show");
+
+      setTimeout(() => {
+        currentCard = images[Math.floor(Math.random() * images.length)];
+        card.src = currentCard;
+        card.classList.add("show");
+      }, 150);
+    }
+
+    function saveCard() {
+      if (!currentCard) return;
+      window.open(currentCard, "_blank");
+    }
+
+    // Load card on first scan
+    showRandomCard();
+  </script>
+</body>
+</html>
